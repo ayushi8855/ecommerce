@@ -56,7 +56,7 @@ router.post("/:id/addresses",async(req,res)=>{
 
 router.patch("/:id/addresses/:index",async(req,res)=>{
     try{ var index = req.params.index
-        const user = await User.findOneAndUpdate({"_id": req.params._id},{$set:{[`address.${index}`]: req.body}})
+        const user = await User.findOneAndUpdate({"_id": req.params.id},{$set:{[`address.${index}`]: req.body}})
         return res.send(user)}
         catch(error){
             return res.status(500).send(error.message)
