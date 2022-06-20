@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
+import {Link} from "react-router-dom"
 export const Alluser = () => {
     const [data, setdata]=useState([])
+   
+
     useEffect(()=>{
        getdata()
     },[])
@@ -12,9 +15,10 @@ export const Alluser = () => {
             setdata(res.data)
           })
     }
+    
   return (
     <div>
-        <table>
+        <table style={{"border":"1px solid black"}}>
            <th>firstname</th>
            <th>lastname</th>
            <th>mobile</th>
@@ -22,22 +26,24 @@ export const Alluser = () => {
            <th>address</th>
        </table>
    {data.map(e=>(
-    <tbody>
+    <tbody >
 
            <td>{e.first_name}</td>
            <td>{e.last_name}</td>
            <td>{e.mobile}</td>
            <td>{e.email}</td>
        
-         {e.address.map((el)=>(
+         {e.address.map((el,i)=>(
              <td>
        <li>house no. {el.house_no}</li>
       <li>street {el.street}</li>
        <li>City {el.city}</li>
        <li>State {el.state}</li>
+      
+      
        </td>
           ))}
-       
+        <Link to={`/editaddress/${e._id}`}><button  >Add Address</button></Link>
           </tbody>
       
    ))}
